@@ -1,18 +1,36 @@
 ﻿// Напишите программу, которая заполнит спирально массив 4 на 4.
 
-int[,] FillMaxtrix(int[,] array, int row, int col)
+void FillMaxtrix(int[,] array)
 {
-  int number = 00;
-  if (array[0,0] == null)
+  int number = 1;
+  int counterI = 0;
+  int counterJ = 0;
+  int startI = 0;
+  int finishI = 0;
+  int startJ = 0;
+  int finishJ = 0;
+
+  while(number  <= array.GetLength(0) * array.GetLength(1))
   {
-    array[0,0] = number;
+    array[counterI, counterJ] = number;
+    if(counterI == startI && counterJ < array.GetLength(1) - finishJ -1 )
+      {counterJ++;}
+    else if(counterJ == array.GetLength(1) - finishJ -1 && counterI < array.GetLength(0) - finishI -1)
+      {counterI++;}
+    else if(counterI == array.GetLength(0) - finishI - 1 && counterJ > startJ)
+      {counterJ--;}
+    else
+      {counterI--;}
+      
+    if((counterI == startI +1) && (counterJ == startJ) && (startJ != array.GetLength(1) - finishJ -1))
+    {
+      startI++;
+      startJ++;
+      finishI++;
+      finishJ++;  
+    }
     number++;
-    FillMaxtrix(row, col+1);
-    FillMaxtrix(row+1, col);
-    FillMaxtrix(row, col-1);
-    FillMaxtrix(row-1, col);
   }
-  return array;
 }
 
 void ShowMatrix(int[,] array)
@@ -27,7 +45,9 @@ void ShowMatrix(int[,] array)
   }
 }
 
-int[,] matrix = FillMaxtrix(matrix, 0, 0);
+int[,] matrix = new int[4,4];
 
-ShowMatrix(Matrix);
+FillMaxtrix(matrix);
+ShowMatrix(matrix);
 
+            
